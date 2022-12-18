@@ -1,6 +1,13 @@
+mport subprocess
+
+# Use subprocess to run the `pip install` command and install the dependencies
+subprocess.run(["pip", "install", "-r", "requirements.txt"])
+
+# You can also use the `check_call` function to run the command and raise an exception if the command fails
+subprocess.check_call(["pip", "install", "-r", "requirements.txt"])
 # Use the latest 2.1 version of CircleCI pipeline process engine.
 # See: https://circleci.com/docs/2.0/configuration-reference
-version: 2.1
+version: 2.2
 
 # Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
 # See: https://circleci.com/docs/2.0/orb-intro/
