@@ -1,0 +1,68 @@
+import sys
+
+# Represents a chess board
+class Board:
+    def __init__(self):
+        # Create the board and initialize all squares to empty
+        self.board = [[' ' for _ in range(8)] for _ in range(8)]
+
+        # Place the initial pieces on the board
+        self.board[0][0] = Rook('b')
+        self.board[0][1] = Knight('b')
+        self.board[0][2] = Bishop('b')
+        self.board[0][3] = Queen('b')
+        self.board[0][4] = King('b')
+        self.board[0][5] = Bishop('b')
+        self.board[0][6] = Knight('b')
+        self.board[0][7] = Rook('b')
+        for i in range(8):
+            self.board[1][i] = Pawn('b')
+        self.board[7][0] = Rook('w')
+        self.board[7][1] = Knight('w')
+        self.board[7][2] = Bishop('w')
+        self.board[7][3] = Queen('w')
+        self.board[7][4] = King('w')
+        self.board[7][5] = Bishop('w')
+        self.board[7][6] = Knight('w')
+        self.board[7][7] = Rook('w')
+        for i in range(8):
+            self.board[6][i] = Pawn('w')
+
+    # Prints the current state of the board
+    def print_board(self):
+        for i in range(8):
+            print(f"{8 - i}  ", end='')
+            for j in range(8):
+                print(f"{self.board[i][j].unicode} ", end='')
+            print()
+        print("\n   a  b  c  d  e  f  g  h")
+
+# Represents a chess piece
+class Piece:
+    def __init__(self, color):
+        self.color = color
+
+    # Returns a list of (row, col) tuples representing all possible moves for this piece
+    def get_possible_moves(self, row, col, board):
+        pass
+
+# Represents a rook
+class Rook(Piece):
+    def __init__(self, color):
+        super().__init__(color)
+        self.unicode = '♜' if color == 'b' else '♖'
+
+    def get_possible_moves(self, row, col, board):
+        moves = []
+        for i in range(8):
+            if i != row:
+                moves.append((i, col))
+        for j in range(8):
+            if j != col:
+                moves.append((row, j))
+        return moves
+
+# Represents a knight
+class Knight(Piece):
+    def __init__(self, color):
+        super().__init__(color)
