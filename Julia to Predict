@@ -1,0 +1,20 @@
+using Chess
+using ChessMoves
+
+# Initialize the board with the starting positions of the pieces
+board = ChessBoard()
+
+# Get all possible moves for the current player
+moves = possible_moves(board)
+
+# Choose a move at random
+move = moves[rand(1:length(moves))]
+
+# Make the move on the board
+make_move!(board, move)
+
+# Predict the next move for the opponent
+predicted_move = predict_move(board)
+
+# Make the predicted move on the board
+make_move!(board, predicted_move)
