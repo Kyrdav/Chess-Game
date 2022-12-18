@@ -1,0 +1,76 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+// Represents a chess board
+class Board {
+public:
+  // Initializes the board with the starting positions of the pieces
+  Board() {
+    board[0][0] = Rook('b');
+    board[0][1] = Knight('b');
+    board[0][2] = Bishop('b');
+    board[0][3] = Queen('b');
+    board[0][4] = King('b');
+    board[0][5] = Bishop('b');
+    board[0][6] = Knight('b');
+    board[0][7] = Rook('b');
+    for (int i = 0; i < 8; i++) {
+      board[1][i] = Pawn('b');
+    }
+    board[7][0] = Rook('w');
+    board[7][1] = Knight('w');
+    board[7][2] = Bishop('w');
+    board[7][3] = Queen('w');
+    board[7][4] = King('w');
+    board[7][5] = Bishop('w');
+    board[7][6] = Knight('w');
+    board[7][7] = Rook('w');
+    for (int i = 0; i < 8; i++) {
+      board[6][i] = Pawn('w');
+    }
+  }
+
+  // Prints the current state of the board
+  void print() {
+    cout << "  a b c d e f g h" << endl;
+    for (int i = 0; i < 8; i++) {
+      cout << 8 - i << " ";
+      for (int j = 0; j < 8; j++) {
+        cout << board[i][j].unicode << " ";
+      }
+      cout << endl;
+    }
+  }
+
+  // Makes a move on the board
+  void make_move(int from_row, int from_col, int to_row, int to_col) {
+    // Update the board with the new position of the piece
+    board[to_row][to_col] = board[from_row][from_col];
+    board[from_row][from_col] = Piece(' ');
+  }
+
+private:
+  // Represents a chess piece
+  class Piece {
+  public:
+    Piece(char color) : color(color) {}
+
+    // Returns a list of (row, col) tuples representing all possible moves for this piece
+    virtual vector<pair<int, int>> get_possible_moves(int row, int col) {
+      return {};
+    }
+
+    char color;
+    char unicode;
+  };
+
+  // Represents a rook
+  class Rook : public Piece {
+  public:
+    Rook(char color) : Piece(color) {
+      unicode = (color == 'b') ? '♜' : '♖';
+    }
+
+    vector<pair<int, int>> get_possible_moves(int row, int col) override {
+      vector
